@@ -16,14 +16,16 @@ A Decision Support System (DSS) that integrates historical price data, technical
 - **Task 2 — Price Prediction:** XGBoost vs Linear Regression (technical only) vs Random Forest
 
 **Data Coverage Range:**
-| Asset | Start Date | End Date |
-|-------|-----------|----------|
-| AAPL price (Yahoo Finance) | 2020-01-01 | 2026-05-10 |
-| Gold price (Yahoo Finance) | 2020-01-01 | 2026-05-10 |
-| AAPL news (Excel, labeled) | 2025-01-01 | 2026-05-10 |
-| Gold news (Excel, labeled) | 2025-12-01 | 2026-05-10 |
-| AAPL news (CSV, unlabeled) | 2020-01-01 | 2022-12-31 |
-| Gold news (CSV, unlabeled) | 2020-01-01 | 2022-12-31 |
+| Asset | File | Start Date | End Date | Labels |
+|-------|------|-----------|----------|--------|
+| AAPL price (Yahoo Finance) | — | 2020-01-01 | 2026-05-10 | — |
+| Gold price (Yahoo Finance) | — | 2020-01-01 | 2026-05-10 | — |
+| AAPL news | apple_news_clean.xlsx | 2025-01-01 | 2026-05-10 | ✅ Yes |
+| Gold news | gold_news_clean.xlsx | 2025-12-01 | 2026-05-10 | ✅ Yes |
+| AAPL news | apple_cleaned_dataset.csv | 2020-01-01 | 2022-12-31 | ❌ No |
+| Gold news | gold_cleaned_dataset.csv | 2020-01-01 | 2022-12-31 | ❌ No |
+| AAPL news | apple_cleaned_dataset1.csv | 2023-01-01 | 2024-12-30 | ❌ No |
+| Gold news | gold_cleaned_dataset1.csv | 2023-01-02 | 2024-12-31 | ❌ No |
 
 ---
 
@@ -31,12 +33,14 @@ A Decision Support System (DSS) that integrates historical price data, technical
 
 ```
 stock_analysis/
-├── stock_analysis.ipynb       # Main Colab notebook (all 8 sections)
+├── stock_analysis.ipynb            # Main Colab notebook (all 8 sections)
 ├── data/
-│   ├── apple_news_clean.xlsx  # AAPL labeled news (2025-2026)
-│   ├── gold_news_clean.xlsx   # Gold labeled news (2025-2026)
-│   ├── apple_cleaned_dataset.csv  # AAPL historical news (2020-2022)
-│   └── gold_cleaned_dataset.csv   # Gold historical news (2020-2022)
+│   ├── apple_news_clean.xlsx       # AAPL labeled news (2025-2026)
+│   ├── gold_news_clean.xlsx        # Gold labeled news (2025-2026)
+│   ├── apple_cleaned_dataset.csv   # AAPL historical news (2020-2022)
+│   ├── gold_cleaned_dataset.csv    # Gold historical news (2020-2022)
+│   ├── apple_cleaned_dataset1.csv  # AAPL extended news (2023-2024)
+│   └── gold_cleaned_dataset1.csv   # Gold extended news (2023-2024)
 ├── README.md
 └── requirements.txt
 ```
@@ -52,6 +56,8 @@ Upload the following to your Colab session or mount Google Drive:
 - `gold_news_clean.xlsx`
 - `apple_cleaned_dataset.csv`
 - `gold_cleaned_dataset.csv`
+- `apple_cleaned_dataset1.csv`
+- `gold_cleaned_dataset1.csv`
 
 ### Step 2 — Install Dependencies
 Run **Section 1** of the notebook:
