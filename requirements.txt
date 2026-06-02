@@ -1,0 +1,30 @@
+# ============================================================
+# Interactive Web Platform for Stock and Gold Data Analysis
+# UQU-DS-2025-M03
+# Data Coverage: 2020-01-01 to 2026-05-10
+# ============================================================
+
+# ── Data & Numerics ─────────────────────────────────────────
+pandas>=2.0.0
+numpy>=1.26.0
+openpyxl>=3.1.0          # Excel file reading (.xlsx)
+
+# ── Financial Data ───────────────────────────────────────────
+yfinance>=0.2.40          # Yahoo Finance price data (AAPL, GC=F)
+
+# ── Machine Learning ─────────────────────────────────────────
+scikit-learn>=1.4.0       # Logistic Regression, Random Forest, Linear Regression, TF-IDF, TimeSeriesSplit
+xgboost>=2.0.0            # XGBoost price prediction
+
+# ── NLP & Sentiment Analysis ─────────────────────────────────
+vaderSentiment>=3.3.2     # VADER rule-based sentiment
+nltk>=3.8.0               # Tokenization, stopwords, lemmatization
+transformers>=4.40.0      # RoBERTa (cardiffnlp/twitter-roberta-base-sentiment-latest)
+torch>=2.0.0              # PyTorch backend for HuggingFace transformers
+
+# ── Visualization ────────────────────────────────────────────
+plotly>=5.20.0            # Interactive charts (price, sentiment, signals)
+
+# ── Utilities ────────────────────────────────────────────────
+scipy>=1.11.0             # Statistical functions
+tqdm>=4.66.0              # Progress bars
