@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة إسهام — نظام دعم القرار الذكي للأسهم والذهب</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- FontAwesome Icons for Dashboard Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js CDN for High Performance Interactive Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Chart.js annotation plugin for dashed lines in RSI -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1"></script>
+</head>
+<body>
+
+  <!-- FIXED SIDEBAR TOGGLE BUTTON -->
+  <button id="sidebar-toggle" class="sidebar-toggle-btn glass" onclick="toggleSidebar()">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <div class="app-container">
+    
+    <!-- Right Sidebar for Navigation (RTL layout) -->
+    <aside class="sidebar glass">
+      <div class="brand">
+        <i class="fa-solid fa-chart-line brand-icon"></i>
+        <span class="brand-name">إسْـهَـام</span>
+      </div>
+      
+      <ul class="nav-menu">
+        <li class="nav-item active" data-tab="tab-intro">
+          <a class="nav-link">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>تعريف بالمشروع</span>
+          </a>
+        </li>
+        <li class="nav-item" data-tab="tab-dashboard">
+          <a class="nav-link">
+            <i class="fa-solid fa-gauge"></i>
+            <span>لوحة التحكم الرئيسية</span>
+          </a>
+        </li>
+        <li class="nav-item" data-tab="tab-apple">
+          <a class="nav-link">
+            <i class="fa-brands fa-apple"></i>
+            <span>تحليل أسهم Apple</span>
+          </a>
+        </li>
+        <li class="nav-item" data-tab="tab-gold">
+          <a class="nav-link">
+            <i class="fa-solid fa-coins"></i>
+            <span>تحليل سوق الذهب</span>
+          </a>
+        </li>
+        <li class="nav-item" data-tab="tab-models">
+          <a class="nav-link">
+            <i class="fa-solid fa-brain"></i>
+            <span>تقييم نماذج الذكاء الاصطناعي</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <p>جامعة أم القرى</p>
+        <p>كلية الحاسبات</p>
+        <p>قسم علم البيانات — 2026</p>
+      </div>
+    </aside>
+    
+    <!-- Main Dashboard Area -->
+    <main class="main-content">
+
+      <!-- Intro Landing Tab Panel (Active by default) -->
+      <div class="tab-panel active" id="panel-intro">
+        <div class="intro-container">
+          
+          <!-- Hero Section -->
+          <div class="intro-hero glass">
+            <div class="hero-glow"></div>
+            <i class="fa-solid fa-graduation-cap hero-cap-icon"></i>
+            <h1 class="hero-title">منصة إِسْـهَـام</h1>
+            <h2 class="hero-subtitle">نظام دعم القرار المالي الذكي باستخدام معالجة اللغات الطبيعية وتعلم الآلة</h2>
+            <p class="hero-description">
+              مشروع تخرج لدرجة البكالوريوس في علم البيانات. يهدف النظام إلى دعم القرار للمستثمرين في السوقين (سوق أسهم أبل وسوق الذهب) عبر التنبؤ الذكي بالاتجاهات الاستثمارية بالاعتماد على دمج النماذج التنبؤية (XGBoost) مع مشاعر المستثمرين المستخلصة من الأخبار اليومية.
+            </p>
+            <button class="cta-btn pulse" onclick="enterDashboard()">
+              <span>الدخول للوحة التحليل التفاعلية</span>
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+
+          <!-- Features Highlight -->
+          <div class="intro-grid">
+            <div class="intro-card glass">
+              <i class="fa-solid fa-brain card-icon text-purple"></i>
+              <h3>تحليل المشاعر التلقائي (NLP)</h3>
+              <p>استخلاص فوري للمشاعر العامة من عناوين الأخبار المالية بالاعتماد على خوارزميات VADER و Logistic Regression و RoBERTa لتحديد الاتجاه الإيجابي أو السلبي وتأثيره على السوق.</p>
+            </div>
+            <div class="intro-card glass">
+              <i class="fa-solid fa-chart-line card-icon text-blue"></i>
+              <h3>التنبؤ الذكي بالأسعار (XGBoost)</h3>
+              <p>تطبيق نماذج انحدار متطورة للتنبؤ بعوائد 5 أيام مستقبلية بناءً على دمج المؤشرات الفنية للأسعار كـ RSI و MACD و Bollinger Bands مع معدل المشاعر المجمع.</p>
+            </div>
+            <div class="intro-card glass">
+              <i class="fa-solid fa-circle-exclamation card-icon text-gold"></i>
+              <h3>إشارة التنبؤ الفوري</h3>
+              <p>نظام ذكي متكامل لإنشاء توصيات فورية (شراء / إمساك / بيع) بناءً على مستويات إشارات الفولتية والتنبؤ الفني للتسهيل على صناع القرار والمستثمرين.</p>
+            </div>
+          </div>
+
+          <!-- Developers Showcase Team Section -->
+          <div class="team-section">
+            
+            <!-- Supervisor Showcase -->
+            <div class="supervisor-container glass">
+              <span class="supervisor-label">تحت إشراف المشرف على المشروع</span>
+              <h3 class="supervisor-name"><i class="fa-solid fa-user-tie"></i> الدكتور ياسر الصالح</h3>
+            </div>
+
+            <h3 class="team-title"><i class="fa-solid fa-users"></i> فريق العمل والطلاب</h3>
+            <p class="team-subtitle">قسم علم البيانات — كلية الحاسبات — جامعة أم القرى</p>
+            
+            <div class="team-grid">
+              <!-- Student 1 -->
+              <div class="developer-card glass glow-gold">
+                <div class="dev-avatar">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h4>نواف العدواني</h4>
+              </div>
+              
+              <!-- Student 2 -->
+              <div class="developer-card glass glow-purple">
+                <div class="dev-avatar">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h4>عبدالمحسن عسيري</h4>
+              </div>
+              
+              <!-- Student 3 -->
+              <div class="developer-card glass glow-blue">
+                <div class="dev-avatar">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h4>مروان العتيبي</h4>
+              </div>
+              
+              <!-- Student 4 -->
+              <div class="developer-card glass glow-green">
+                <div class="dev-avatar">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h4>يزيد الصيعري</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Top Header Row -->
+      <header class="dashboard-header">
+        <div class="header-title">
+          <h1>إسهام — نظام التحليل المالي الذكي</h1>
+          <p>لوحة التحكم الفورية لتحليل الأسهم والذهب باستخدام نماذج تعلم الآلة ومعالجة اللغات الطبيعية (NLP)</p>
+        </div>
+        
+        <!-- Toggle buttons for Asset select in main view -->
+        <div class="asset-selector glass">
+          <button class="selector-btn active" id="btn-aapl" onclick="switchAsset('aapl')">
+            <i class="fa-brands fa-apple"></i>
+            <span>سوق أبل (AAPL)</span>
+          </button>
+          <button class="selector-btn" id="btn-gold" onclick="switchAsset('gold')">
+            <i class="fa-solid fa-coins"></i>
+            <span>سوق الذهب (Gold)</span>
+          </button>
+        </div>
+      </header>
+      
+      <!-- Content Section (Will dynamically show Apple or Gold depending on selector) -->
+      <div class="tab-panel" id="panel-dashboard">
+        
+        <!-- KPI Metrics Row -->
+        <section class="kpi-grid">
+          
+          <!-- Card 1: Close Price -->
+          <div class="kpi-card glass kpi-price">
+            <div class="kpi-header">
+              <span class="kpi-title">سعر الإغلاق الأخير</span>
+              <div class="kpi-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-close-val">$0.00</div>
+            <div class="kpi-change" id="kpi-close-change">
+              <i class="fa-solid fa-circle-notch fa-spin"></i> جار التحميل...
+            </div>
+          </div>
+          
+          <!-- Card 2: RSI -->
+          <div class="kpi-card glass kpi-rsi">
+            <div class="kpi-header">
+              <span class="kpi-title">مؤشر القوة النسبية (RSI 14)</span>
+              <div class="kpi-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-rsi-val">0.0</div>
+            <div class="kpi-change" id="kpi-rsi-status">معتدل</div>
+          </div>
+          
+          <!-- Card 3: Sentiment -->
+          <div class="kpi-card glass kpi-sent">
+            <div class="kpi-header">
+              <span class="kpi-title">متوسط مشاعر الأخبار (Daily AI Score)</span>
+              <div class="kpi-icon"><i class="fa-solid fa-face-smile"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-sent-val">0.00</div>
+            <div class="kpi-change" id="kpi-sent-status">إيجابي خفيف</div>
+          </div>
+          
+          <!-- Card 4: Latest Signal Recommendation -->
+          <div class="kpi-card glass kpi-sig">
+            <div class="kpi-header">
+              <span class="kpi-title">التنبؤ الاستثماري الفوري</span>
+              <div class="kpi-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            </div>
+            <div class="kpi-value" id="kpi-signal-val">HOLD</div>
+            <div class="kpi-change" id="kpi-signal-score">معدل التقييم: -1 / 3</div>
+          </div>
+          
+        </section>
+        
+        <!-- Row 1: Interactive Price Chart + Prediction Box (Project Summary Output) -->
+        <section class="dashboard-row">
+          
+          <!-- Interactive Line Chart Container -->
+          <div class="panel-card glass">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fa-solid fa-chart-area"></i>
+                <h3 id="price-chart-title">مخطط الأسعار التاريخي والمؤشرات الفنية (سوق أبل)</h3>
+              </div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: bold;">
+                <span style="color: var(--accent-blue);">●</span> سعر الإغلاق 
+                <span style="color: #ff9f43; margin-right: 10px;">●</span> SMA 10 
+                <span style="color: var(--accent-gold); margin-right: 10px;">●</span> SMA 20
+                <span style="color: rgba(46, 204, 113, 0.4); margin-right: 10px;">●</span> Bollinger Bands
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="mainPriceChart"></canvas>
+            </div>
+          </div>
+          
+          <!-- PREMIUM PREDICTION CARD (التنبؤ الاستثماري) -->
+          <div class="panel-card glass prediction-box">
+            <h3 style="font-weight: 800; font-size: 1.3rem; margin-bottom: 0.2rem; background: linear-gradient(135deg, #fff, var(--text-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">التنبؤ الاستثماري النهائي</h3>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 1rem;">بناءً على نموذج XGBoost ومشاعر الأخبار والتحليل الفني</p>
+            
+            <div class="signal-ring-container">
+              <svg class="signal-svg">
+                <!-- Outer Ring Background -->
+                <circle class="signal-circle-bg" cx="90" cy="90" r="75"></circle>
+                <!-- Outer Ring Progress -->
+                <circle class="signal-circle-progress" id="signal-progress-circle" cx="90" cy="90" r="75" stroke-dasharray="471.2" stroke-dashoffset="120"></circle>
+              </svg>
+              
+              <div class="signal-center-info">
+                <div class="signal-badge hold" id="final-signal-badge">HOLD</div>
+                <span class="signal-desc" id="final-signal-desc">إمساك استثماري</span>
+              </div>
+            </div>
+            
+            <!-- Exact Stats Distribution from Project Summary -->
+            <div class="prediction-stats">
+              
+              <!-- BUY STAT BAR -->
+              <div class="stat-bar-container">
+                <div class="stat-label-row">
+                  <span style="color: var(--accent-green);"><i class="fa-solid fa-caret-up"></i> شراء (BUY)</span>
+                  <span id="stat-buy-pct">19.2%</span>
+                </div>
+                <div class="stat-bar-bg">
+                  <div class="stat-bar-fill fill-buy" id="bar-buy-fill" style="width: 19.2%;"></div>
+                </div>
+              </div>
+              
+              <!-- HOLD STAT BAR -->
+              <div class="stat-bar-container">
+                <div class="stat-label-row">
+                  <span style="color: var(--accent-gold);"><i class="fa-solid fa-minus"></i> إمساك (HOLD)</span>
+                  <span id="stat-hold-pct">78.9%</span>
+                </div>
+                <div class="stat-bar-bg">
+                  <div class="stat-bar-fill fill-hold" id="bar-hold-fill" style="width: 78.9%;"></div>
+                </div>
+              </div>
+              
+              <!-- SELL STAT BAR -->
+              <div class="stat-bar-container">
+                <div class="stat-label-row">
+                  <span style="color: var(--accent-red);"><i class="fa-solid fa-caret-down"></i> بيع (SELL)</span>
+                  <span id="stat-sell-pct">1.9%</span>
+                </div>
+                <div class="stat-bar-bg">
+                  <div class="stat-bar-fill fill-sell" id="bar-sell-fill" style="width: 1.9%;"></div>
+                </div>
+              </div>
+              
+            </div>
+            
+            <p style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; margin-top: 1rem; line-height: 1.4;">
+              * إشارة التنبؤ تجمع بين توقعات العائد لـ 5 أيام (XGBoost) وقراءات RSI اليومية وتقييم المشاعر المجمع.
+            </p>
+          </div>
+          
+        </section>
+        
+        <!-- Row 2: Indicators (RSI & MACD) -->
+        <section class="indicator-charts-grid">
+          
+          <!-- RSI Chart -->
+          <div class="panel-card glass indicator-chart-box">
+            <div class="panel-header" style="margin-bottom: 0.8rem;">
+              <div class="panel-title">
+                <i class="fa-solid fa-wave-square" style="color: var(--accent-purple);"></i>
+                <h4 style="font-weight: 700; font-size: 1rem;">مؤشر القوة النسبية (RSI 14) التفاعلي</h4>
+              </div>
+            </div>
+            <div style="height: 170px; position: relative;">
+              <canvas id="rsiChart"></canvas>
+            </div>
+          </div>
+          
+          <!-- MACD Chart -->
+          <div class="panel-card glass indicator-chart-box">
+            <div class="panel-header" style="margin-bottom: 0.8rem;">
+              <div class="panel-title">
+                <i class="fa-solid fa-chart-bar" style="color: var(--accent-blue);"></i>
+                <h4 style="font-weight: 700; font-size: 1rem;">مؤشر تقارب وتباعد المتوسطات المتحركة (MACD)</h4>
+              </div>
+            </div>
+            <div style="height: 170px; position: relative;">
+              <canvas id="macdChart"></canvas>
+            </div>
+          </div>
+          
+        </section>
+        
+        <!-- Section: News Analysis Feed with NLP Scores -->
+        <section class="news-section" style="margin-top: 2rem;">
+          <div class="panel-card glass">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fa-solid fa-newspaper" style="color: var(--accent-purple);"></i>
+                <h3>موجز الأخبار والتحليل التلقائي لمشاعر الذكاء الاصطناعي</h3>
+              </div>
+              <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 700;">عرض آخر 5 مقالات إخبارية حقيقية محللة</span>
+            </div>
+            
+            <div class="news-feed" id="news-feed-container">
+              <!-- Dynamically populated via app.js -->
+              <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+                <p style="margin-top: 10px;">جاري تحميل ومعالجة بيانات الأخبار...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Section: AI Models Metrics & Benchmarks -->
+        <section class="comparison-section">
+          <div class="comparison-grid">
+            
+            <!-- Table 1: NLP Models Sentiment Performance -->
+            <div class="panel-card glass">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <i class="fa-solid fa-language" style="color: var(--accent-purple);"></i>
+                  <h3>مقارنة دقة نماذج معالجة اللغات الطبيعية (NLP)</h3>
+                </div>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 1rem; line-height: 1.4;">
+                مقارنة بين دقة استخراج المشاعر من عناوين الأخبار مقابل البيانات الحقيقية المرفقة (Ground Truth):
+              </p>
+              
+              <div class="table-container">
+                <table class="custom-table" id="nlp-metrics-table">
+                  <thead>
+                    <tr>
+                      <th>النموذج المستخدم</th>
+                      <th>الدقة (Accuracy)</th>
+                      <th>الضبط (Precision)</th>
+                      <th>الاستدعاء (Recall)</th>
+                      <th>F1-Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <!-- Table 2: ML Stock Price Prediction Performance -->
+            <div class="panel-card glass">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <i class="fa-solid fa-robot" style="color: var(--accent-blue);"></i>
+                  <h3>مقارنة دقة نماذج التنبؤ بالأسعار والاتجاه</h3>
+                </div>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 1rem; line-height: 1.4;">
+                مقارنة بين النماذج الثلاثة للتنبؤ بعوائد الـ 5 أيام المستقبلية بناءً على المؤشرات الفنية والمشاعر المجمعة:
+              </p>
+              
+              <div class="table-container">
+                <table class="custom-table" id="ml-metrics-table">
+                  <thead>
+                    <tr>
+                      <th>النموذج المطبق</th>
+                      <th>معامل التحديد (R²)</th>
+                      <th>خطأ RMSE</th>
+                      <th>خطأ MAE</th>
+                      <th>دقة الاتجاه (Accuracy)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+        
+      </div>
+      
+      <!-- Footer details -->
+      <footer class="dashboard-footer">
+        <div>
+          <span>نظام إسهام لدعم القرار المالي © 2026. مشروع تخرج مسار علم البيانات.</span>
+        </div>
+        <div>
+          <span class="uqu-credits">جامعة أم القرى — UQU-DS-2025-M03</span>
+        </div>
+      </footer>
+      
+    </main>
+    
+  </div>
+
+  <!-- Javascript Scripts -->
+  <!-- data.js contains the window.SahmData compiled datasets -->
+  <script src="data.js"></script>
+  <!-- app.js controls the page interactions and Chart.js setups -->
+  <script src="app.js"></script>
+</body>
+</html>
