@@ -117,6 +117,11 @@ After Section 8, the notebook outputs:
 | Sentiment Contribution | +5–6% vs no-sentiment baseline | — |
 
 ---
+## How to Run the Website
+1. Ensure you have a web browser installed (e.g., Chrome, Firefox).
+2. Download the project repository as a ZIP file or clone it to your local machine.
+3. Open the folder containing the web files(stock website).
+4. Locate the `main.html` file and double-click it to open it directly in your browser.
 
 ## License
 Academic use only — Umm Al-Qura University, 2025/2026.
